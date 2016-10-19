@@ -42,7 +42,10 @@ class ChatBot(object):
         # The output adapter must be an instance of OutputAdapter
         self.validate_adapter_class(output_adapter, OutputAdapter)
 
-        StorageAdapterClass = import_module(storage_adapter)
+        if type(storage_adapter) == str:
+            StorageAdapterClass = import_module(storage_adapter)
+        else:
+            StorageAdapterClass = storage_adapter
         InputAdapterClass = import_module(input_adapter)
         OutputAdapterClass = import_module(output_adapter)
 
